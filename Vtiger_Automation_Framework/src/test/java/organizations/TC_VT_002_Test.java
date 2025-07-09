@@ -31,7 +31,7 @@ public class TC_VT_002_Test extends BaseClass{
 		
 		op.getCreateIconLink().click();
 		
-		op.getOrganizationNameTextField().sendKeys(eutil.getStringDatafromExcel("Organization", 1, 0));
+		op.getOrganizationNameTextField().sendKeys(eutil.getStringDatafromExcel("Organization", 2, 0));
 		
 		op.getSaveButton().click();
 		
