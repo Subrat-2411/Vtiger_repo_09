@@ -3,6 +3,7 @@ package organizations;
 import java.io.IOException;
 
 import org.apache.poi.EncryptedDocumentException;
+import org.openqa.selenium.UnhandledAlertException;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -35,11 +36,12 @@ public class TC_VT_002_Test extends BaseClass{
 			op.getOrganizationNameTextField().sendKeys(eutil.getStringDatafromExcel("Organization", 4, 0));
 		} catch (EncryptedDocumentException e) {
 			
-			op.getOrganizationNameTextField().sendKeys(eutil.getStringDatafromExcel("Organization", 5, 0));
-			e.printStackTrace();
+			System.out.println("Already exists");
 		} catch (IOException e) {
 			System.out.println("Duplication Happened. Please Change Data.");
-			e.printStackTrace();
+		}
+		catch(UnhandledAlertException e) {
+			System.out.println("change the data. it is duplicated.");
 		}
 		
 		op.getSaveButton().click();
