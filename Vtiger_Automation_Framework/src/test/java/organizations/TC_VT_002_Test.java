@@ -31,7 +31,16 @@ public class TC_VT_002_Test extends BaseClass{
 		
 		op.getCreateIconLink().click();
 		
-		op.getOrganizationNameTextField().sendKeys(eutil.getStringDatafromExcel("Organization", 4, 0));
+		try {
+			op.getOrganizationNameTextField().sendKeys(eutil.getStringDatafromExcel("Organization", 4, 0));
+		} catch (EncryptedDocumentException e) {
+			
+			op.getOrganizationNameTextField().sendKeys(eutil.getStringDatafromExcel("Organization", 5, 0));
+			e.printStackTrace();
+		} catch (IOException e) {
+			System.out.println("Duplication Happened. Please Change Data.");
+			e.printStackTrace();
+		}
 		
 		op.getSaveButton().click();
 		
