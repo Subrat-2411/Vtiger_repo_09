@@ -75,17 +75,17 @@ public class BaseClass {
 	@AfterMethod(alwaysRun = true)
 	public void logout()
 	{
-		HomePage hp=new HomePage(driver);
+//		HomePage hp=new HomePage(driver);
 		
-		wutil.mouseHover(driver, hp.getAdministratorIconLink());
+//		wutil.mouseHover(driver, hp.getAdministratorIconLink());
 		
-		hp.getSignoutLink().click();
+//		hp.getSignoutLink().click();
 	}
 	
 	@AfterClass(alwaysRun = true)
 	public void closeBrowser()
 	{
-		driver.quit();
+//		driver.quit();
 	}
 	
 	@AfterSuite(alwaysRun = true)

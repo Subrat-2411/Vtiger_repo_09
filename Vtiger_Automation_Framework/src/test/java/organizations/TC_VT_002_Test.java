@@ -3,6 +3,7 @@ package organizations;
 import java.io.IOException;
 
 import org.apache.poi.EncryptedDocumentException;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.UnhandledAlertException;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
@@ -12,6 +13,7 @@ import com.aventstack.extentreports.Status;
 
 import genericutility.BaseClass;
 import genericutility.ExcelUtility;
+import genericutility.JavaUtility;
 import genericutility.ListenerUtility;
 import objectrepository.HomePage;
 import objectrepository.OrganizationsPage;
@@ -22,6 +24,9 @@ public class TC_VT_002_Test extends BaseClass{
 	@Test(groups = "smoke")
 	public void createOrganization() throws EncryptedDocumentException, IOException
 	{
+		
+		JavaUtility jutil=new JavaUtility();
+		
 		ExcelUtility eutil=new ExcelUtility();
 		
 		HomePage hp=new HomePage(driver);
@@ -32,17 +37,13 @@ public class TC_VT_002_Test extends BaseClass{
 		
 		op.getCreateIconLink().click();
 		
-		try {
-			op.getOrganizationNameTextField().sendKeys(eutil.getStringDatafromExcel("Organization", 4, 0));
-		} catch (EncryptedDocumentException e) {
-			
-			System.out.println("Already exists");
-		} catch (IOException e) {
-			System.out.println("Duplication Happened. Please Change Data.");
-		}
-		catch(UnhandledAlertException e) {
-			System.out.println("change the data. it is duplicated.");
-		}
+		op.getOrganizationNameTextField().sendKeys(eutil.getStringDatafromExcel("Organization", 4, 0));
+		
+		Alert popup = wutil.switchToAlert(driver);
+		
+		popup.accept();
+		
+		op.getOrganizationNameTextField().sendKeys(eutil.getStringDatafromExcel("Organization", 4, 0)+jutil.getRandomNumber());
 		
 		op.getSaveButton().click();
 		
